@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>Viness - Classify your Iris</title>
+</head>
+
+<body>
+    <section class="hero is-link is-medium">
+        <div class="hero-body">
+            <div class="">
+                <p class="title">
+                    Welcome to Viness
+                </p>
+                <p class="subtitle">
+                    The only classifier Iris flower you'll ever need.
+                </p>
+            </div>
+        </div>
+    </section>
+    {% if flower_name != "" %}
+    <div class="notification is-success is-light">
+        <button class="delete"></button>
+        The model predicts that your flower is an <strong>{{ flower_name }}</strong>
+    </div>
+    {% endif %}
+    <section class="section">
+        <h1 class="title">Start Classifying</h1>
+        <h2 class="subtitle">
+            Use this simple form to classify which <strong>Iris-flower</strong> you found.
+        </h2>
+        <form action="/classify" method="POST">
+            <div class="field">
+                <label class="label">Sepal length</label>
+                <div class="control">
+                    <input class="input is-medium" type="number" placeholder="0" step="0.01" required="required"
+                        name="sepal-length">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Sepal width</label>
+                <div class="control">
+                    <input class="input is-medium" type="number" placeholder="0" step="0.01" required="required"
+                        name="sepal-width">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Petal length</label>
+                <div class="control">
+                    <input class="input is-medium" type="number" placeholder="0" step="0.01" required="required"
+                        name="petal-length">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Petal width</label>
+                <div class="control">
+                    <input class="input is-medium" type="number" placeholder="0" step="0.01" required="required"
+                        name="petal-width">
+                </div>
+            </div>
+            <div class="field">
+                <button class="button is-link">
+                    Classify Flower
+                </button>
+            </div>
+        </form>
+    </section>
+    <section>
+        <footer class="footer">
+            <div class="content has-text-centered">
+              <p>
+                <strong>Viness</strong> is based on the Iris-flower dataset. 
+                I made a machine learning model based on the DecisionTreeClassifier.
+                By manipulating the test/train-split to a 90%-training and 10% testing split the model came out with a 100% accuracy.
+                This is because of <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>, what this essentially means is that while my model has a 100% accuracy on the dataset it might not have 100% accuracy on your dataset. That explains why mishaps might happen.
+              </p>
+              <br>
+              <p>
+                <strong>Viness</strong> by <a href="https://github.com/GustavTheUseless">Gustav Petersen</a>. The source code is licensed
+                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>, and is avaliable <a href="https://github.com/GustavTheUseless/Iris-Flask-App/">here</a>.
+              </p>
+            </div>
+          </footer> 
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+                const $notification = $delete.parentNode;
+
+                $delete.addEventListener('click', () => {
+                    $notification.parentNode.removeChild($notification);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
